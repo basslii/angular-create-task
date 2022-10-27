@@ -1,0 +1,84 @@
+<div class="container-fluid">
+  <form [formGroup]="addMoreForm">
+    <div class="card">
+      <div class="card-header text-center">Add Daily Task Report</div>
+
+      <div class="card-body">
+        <div class="row">
+          <div class="inputForm">
+              <label>Title</label>
+              <input matInput formControlName="title" class="formControl">
+          </div>
+          <div class="inputForm">
+              <label>type</label>
+              <select formControlName="type" class="formControl">
+                <option value="">None</option>
+                <option value="1">Plan</option>
+                <option value="2">Routine</option>
+                <option value="3">R&D</option>
+              </select>
+          </div>
+          <div class="inputForm">
+              <label>descripition</label>
+              <textarea matInput formControlName="descripition" class="formControl"></textarea>
+          </div>
+        </div>
+    
+        <div class="row">
+          <div class="col-sm-12 table-responsive" formArrayName="itemRows">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th style="white-space: nowrap;padding-right: 4em;float:center"><span class="required-field"></span>Time Range</th>
+                  <th style="white-space: nowrap;padding-right: 4em;float:center">Learn</th>
+                  <th style="white-space: nowrap;padding-right: 4em;float:center">Descripition</th>
+                  <th style="white-space: nowrap;padding-right: 4em;float:center">Suggestion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- <tr *ngFor="let itemrow of addMoreForm.controls.itemRows['controls']; let i=index" [formGroupName]="i"> -->
+                <!-- <tr *ngFor="let itemrow of addMoreForm.get('itemRows'); let i=index" [formGroupName]="i"> -->
+                <tr *ngFor="let itemrow of formArr.controls; let i=index" [formGroupName]="i">
+                    <td style="white-space: nowrap;"> 
+                      <!-- <input id="timeRange{{i}}" formControlName="timeRange" class="form-control"> -->
+                      <textarea id="timeRange{{i}}" formControlName="timeRange" class="form-control reset"></textarea>
+                    </td>
+                    <td> 
+                      <textarea id="learn{{i}}" formControlName="learn" class="form-control reset"></textarea>
+                    </td>
+                    <td> 
+                      <textarea formControlName="descripition" class="form-control reset"></textarea>
+                    </td>
+                    <td> 
+                      <textarea formControlName="suggestion" class="form-control reset"></textarea>
+                    </td>
+                    <td> 
+                      <!-- <button *ngIf="addMoreForm.get('itemRows').length > 1" (click)="deleteRow(i)" class="btn btn-danger"> -->
+                      <button *ngIf="formArr.controls.length > 1" (click)="deleteRow(i)" class="btn btn-danger">
+                          <!-- <i class="fa fa-minus-circle" aria-hidden="false"></i> -->
+                          delete
+                      </button>
+                    </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td>
+                    <button type="button" (click)="addNewRow()" class="btn btn-primary">
+                      <!-- <i class="fa fa-plus-circle" aria-hidden="false"></i> -->
+                      add
+                    </button>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="card-footer">
+        <button mat-raised-button color="primary">Primary</button>
+      </div> -->
+    </div>
+  </form> 
+</div>
